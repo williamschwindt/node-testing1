@@ -1,0 +1,23 @@
+{
+  "name": "testing1",
+  "version": "1.0.0",
+  "description": "In this project, you will demonstrate proficiency by writing unit tests and production code to satisfy the _Minimum Viable Product_ described below.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williamschwindt/node-testing1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/williamschwindt/node-testing1/issues"
+  },
+  "homepage": "https://github.com/williamschwindt/node-testing1#readme",
+  "devDependencies": {
+    "jest": "^26.0.1"
+  }
+}

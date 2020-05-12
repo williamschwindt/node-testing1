@@ -14,7 +14,13 @@ function fail(item) {
 }
 
 function repair(item) {
-  return { ...item };
+  if(!item.name || !item.durability || !item.enhancment) {
+    throw new Error('item needs name, durability, and enhancment values')
+  }
+  return { 
+    ...item,
+    durability: 100
+  };
 }
 
 function get(item) {
