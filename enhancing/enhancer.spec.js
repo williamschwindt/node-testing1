@@ -60,13 +60,26 @@ describe('enhancment success unit tests', () => {
     })
 
     test('item has all keys', () => {
-        expect(() => enhancer.repair({})).toThrow()
+        expect(() => enhancer.succeed({})).toThrow()
+    })
+
+    test('item has values in allowed range', () => {
+        expect(() => enhancer.succeed({
+            name: 'hammer',
+            durability: -1,
+            enhancment: -1
+        })).toThrow
+        expect(() => enhancer.succeed({
+            name: 'hammer',
+            durability: 101,
+            enhancment: 21
+        })).toThrow
     })
 })
 
-describe('enhancment failure unit tests', () => {
+describe('enhancment fail unit tests', () => {
     test('item enhancment and durability changed correctly (for < en15)', () => {
-        expect(enhancer.failure({
+        expect(enhancer.fail({
             name: 'hammer',
             durability: 100,
             enhancment: 14
@@ -75,16 +88,7 @@ describe('enhancment failure unit tests', () => {
             durability: 95,
             enhancment: 14
         })
-        expect(enhancer.failure({
-            name: 'hammer',
-            durability: 0,
-            enhancment: 14
-        })).toEqual({
-            name: 'hammer',
-            durability: 0,
-            enhancment: 14
-        })
-        expect(enhancer.failure({
+        expect(enhancer.fail({
             name: 'hammer',
             durability: 100,
             enhancment: 14
@@ -95,11 +99,70 @@ describe('enhancment failure unit tests', () => {
         })
     })
 
-    test('', () => {
-        
+    test('item enhancment and durability changed correctly (for >= en15)', () => {
+        expect(enhancer.fail({
+            name: 'hammer',
+            durability: 100,
+            enhancment: 15
+        })).toEqual({
+            name: 'hammer',
+            durability: 90,
+            enhancment: 15
+        })
+        expect(enhancer.fail({
+            name: 'hammer',
+            durability: 0,
+            enhancment: 15
+        })).toEqual({
+            name: 'hammer',
+            durability: 0,
+            enhancment: 15
+        })
+        expect(enhancer.fail({
+            name: 'hammer',
+            durability: 100,
+            enhancment: 16
+        })).toEqual({
+            name: 'hammer',
+            durability: 90,
+            enhancment: 16
+        })
     })
 
-    test('', () => {
-        
+    test('item enhancment and durability changed correctly (for > en16)', () => {
+        expect(enhancer.fail({
+            name: 'hammer',
+            durability: 100,
+            enhancment: 17
+        })).toEqual({
+            name: 'hammer',
+            durability: 90,
+            enhancment: 16
+        })
+        expect(enhancer.fail({
+            name: 'hammer',
+            durability: 0,
+            enhancment: 17
+        })).toEqual({
+            name: 'hammer',
+            durability: 0,
+            enhancment: 16
+        })
+    })
+    test('item has values in allowed range', () => {
+        expect(() => enhancer.fail({
+            name: 'hammer',
+            durability: -1,
+            enhancment: -1
+        })).toThrow
+        expect(() => enhancer.fail({
+            name: 'hammer',
+            durability: 101,
+            enhancment: 21
+        })).toThrow
+    })
+
+    test('item has all keys', () => {
+        expect(() => enhancer.fail({})).toThrow()
     })
 })
